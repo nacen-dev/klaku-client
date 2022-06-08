@@ -8,15 +8,19 @@ describe("Signup Form", () => {
   it("should have a email, first name, last name, password, confirm password fields, and signup button", () => {
     render(<SignupForm submit={submit} />);
 
+    const email = screen.getByLabelText(/email/i);
+    const firstName = screen.getByLabelText(/first name/i);
+    const lastName = screen.getByLabelText(/last name/i);
     const password = screen.getAllByLabelText(/password/i)[0];
     const confirmPassword = screen.getAllByLabelText(/password/i)[1];
+    const submitButton = screen.getByRole("button", { name: /sign up/i });
 
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/first name/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/last name/i)).toBeInTheDocument();
+    expect(email).toBeInTheDocument();
+    expect(firstName).toBeInTheDocument();
+    expect(lastName).toBeInTheDocument();
     expect(password).toBeInTheDocument();
     expect(confirmPassword).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /signup/i })).toBeInTheDocument();
+    expect(submitButton).toBeInTheDocument();
   });
 
   it("should allow the user to signup with their information", () => {
@@ -27,7 +31,7 @@ describe("Signup Form", () => {
     const lastName = screen.getByLabelText(/last name/i);
     const password = screen.getAllByLabelText(/password/i)[0];
     const confirmPassword = screen.getAllByLabelText(/password/i)[1];
-    const submitButton = screen.getByRole("button", { name: /signup/i });
+    const submitButton = screen.getByRole("button", { name: /sign up/i });
 
     const user = userEvent.setup();
 
