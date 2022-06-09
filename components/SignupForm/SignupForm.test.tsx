@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SignupForm } from "./SignupForm";
 
@@ -12,42 +12,44 @@ describe("Signup Form", () => {
     const firstName = screen.getByLabelText(/first name/i);
     const lastName = screen.getByLabelText(/last name/i);
     const password = screen.getAllByLabelText(/password/i)[0];
-    const confirmPassword = screen.getAllByLabelText(/password/i)[1];
+    const passwordConfirmation = screen.getAllByLabelText(/password/i)[1];
     const submitButton = screen.getByRole("button", { name: /sign up/i });
 
     expect(email).toBeInTheDocument();
     expect(firstName).toBeInTheDocument();
     expect(lastName).toBeInTheDocument();
     expect(password).toBeInTheDocument();
-    expect(confirmPassword).toBeInTheDocument();
+    expect(passwordConfirmation).toBeInTheDocument();
     expect(submitButton).toBeInTheDocument();
   });
 
-  it("should allow the user to signup with their information", () => {
+  it("should allow the user to signup with their information", async () => {
     render(<SignupForm submit={submit} />);
 
     const email = screen.getByLabelText(/email/i);
     const firstName = screen.getByLabelText(/first name/i);
     const lastName = screen.getByLabelText(/last name/i);
     const password = screen.getAllByLabelText(/password/i)[0];
-    const confirmPassword = screen.getAllByLabelText(/password/i)[1];
+    const passwordConfirmation = screen.getAllByLabelText(/password/i)[1];
     const submitButton = screen.getByRole("button", { name: /sign up/i });
 
     const user = userEvent.setup();
 
-    user.type(firstName, "nacen");
-    user.type(lastName, "dev");
-    user.type(email, "nacen@test.com");
-    user.type(password, "123456");
-    user.type(confirmPassword, "123456");
-    user.click(submitButton);
+    await user.type(firstName, "nacen");
+    await user.type(lastName, "dev");
+    await user.type(email, "nacen@test.com");
+    await user.type(password, "123456");
+    await user.type(passwordConfirmation, "123456");
+    await user.click(submitButton);
 
-    expect(submit).toHaveBeenCalledWith({
-      firstName: "nacen",
-      lastName: "dev",
-      email: "nacen@test.com",
-      password: "123456",
-      confirmPassword: "123456"
-    });
+    await waitFor(() =>
+      expect(submit).toHaveBeenCalledWith({
+        firstName: "nacen",
+        lastName: "dev",
+        email: "nacen@test.com",
+        password: "123456",
+        passwordConfirmation: "123456",
+      })
+    );
   });
 });
