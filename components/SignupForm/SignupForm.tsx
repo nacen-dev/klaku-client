@@ -1,11 +1,13 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { FormErrorDisplay } from "../FormErrorDisplay/FormErrorDisplay";
-import { signUpFormData } from "../../axios/userApi";
+import { ErrorText } from "../ErrorText/ErrorText";
+import { SignUpFormData } from "../../axios/userApi";
 
 interface Props {
-  submit: (userData: signUpFormData) => Promise<any>;
+  submit: (userData: SignUpFormData) => void;
+  signUpMessage: string;
+  errorMessage: string;
 }
 
 const SignupSchema = Yup.object().shape({
@@ -25,7 +27,7 @@ const SignupSchema = Yup.object().shape({
     .required("Confirm your password"),
 });
 
-export const SignupForm = ({ submit }: Props) => {
+export const SignupForm = ({ submit, signUpMessage, errorMessage }: Props) => {
   return (
     <Formik
       initialValues={{
@@ -44,30 +46,46 @@ export const SignupForm = ({ submit }: Props) => {
         <Form className="flex gap-2 flex-col">
           <div className="flex gap-2 flex-col">
             <label htmlFor="email">Email</label>
-            <Field name="email" id="email" className="border px-2 py-1 rounded" />
+            <Field
+              name="email"
+              id="email"
+              className="border px-2 py-1 rounded"
+            />
             {errors.email && touched.email ? (
-              <FormErrorDisplay message={errors.email} />
+              <ErrorText message={errors.email} />
             ) : null}
           </div>
           <div className="flex gap-2 flex-col">
             <label htmlFor="firstName">First Name</label>
-            <Field name="firstName" id="firstName" className="border px-2 py-1 rounded" />
+            <Field
+              name="firstName"
+              id="firstName"
+              className="border px-2 py-1 rounded"
+            />
             {errors.firstName && touched.firstName ? (
-              <FormErrorDisplay message={errors.firstName} />
+              <ErrorText message={errors.firstName} />
             ) : null}
           </div>
           <div className="flex gap-2 flex-col">
             <label htmlFor="lastName">Last Name</label>
-            <Field name="lastName" id="lastName" className="border px-2 py-1 rounded" />
+            <Field
+              name="lastName"
+              id="lastName"
+              className="border px-2 py-1 rounded"
+            />
             {errors.lastName && touched.lastName ? (
-              <FormErrorDisplay message={errors.lastName} />
+              <ErrorText message={errors.lastName} />
             ) : null}
           </div>
           <div className="flex gap-2 flex-col">
             <label htmlFor="password">Password</label>
-            <Field name="password" id="password" className="border px-2 py-1 rounded" />
+            <Field
+              name="password"
+              id="password"
+              className="border px-2 py-1 rounded"
+            />
             {errors.password && touched.password ? (
-              <FormErrorDisplay message={errors.password} />
+              <ErrorText message={errors.password} />
             ) : null}
           </div>
           <div className="flex gap-2 flex-col">
@@ -78,9 +96,11 @@ export const SignupForm = ({ submit }: Props) => {
               className="border px-2 py-1 rounded"
             />
             {errors.passwordConfirmation && touched.passwordConfirmation ? (
-              <FormErrorDisplay message={errors.passwordConfirmation} />
+              <ErrorText message={errors.passwordConfirmation} />
             ) : null}
           </div>
+          {signUpMessage ? <div className="text-white bg-green-600 p-2 w-full">{signUpMessage}</div> : null}
+          {errorMessage ? <ErrorText message={errorMessage} /> : null}
           <button
             className="px-4 py-2 bg-blue-700 text-white rounded w-full"
             type="submit"
