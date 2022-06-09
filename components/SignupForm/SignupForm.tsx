@@ -50,6 +50,7 @@ export const SignupForm = ({ submit, signUpMessage, errorMessage }: Props) => {
               name="email"
               id="email"
               className="border px-2 py-1 rounded"
+              type="email"
             />
             {errors.email && touched.email ? (
               <ErrorText message={errors.email} />
@@ -83,6 +84,7 @@ export const SignupForm = ({ submit, signUpMessage, errorMessage }: Props) => {
               name="password"
               id="password"
               className="border px-2 py-1 rounded"
+              type="password"
             />
             {errors.password && touched.password ? (
               <ErrorText message={errors.password} />
@@ -94,6 +96,7 @@ export const SignupForm = ({ submit, signUpMessage, errorMessage }: Props) => {
               name="passwordConfirmation"
               id="passwordConfirmation"
               className="border px-2 py-1 rounded"
+              type="password"
             />
             {errors.passwordConfirmation && touched.passwordConfirmation ? (
               <ErrorText message={errors.passwordConfirmation} />
