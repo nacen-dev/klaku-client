@@ -37,48 +37,52 @@ export const SignupForm = ({ submit }: Props) => {
       }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
-        console.log(submit(values));
+        submit(values);
       }}
     >
       {({ errors, touched }) => (
-        <Form>
+        <Form className="flex gap-2 flex-col">
           <div className="flex gap-2 flex-col">
             <label htmlFor="email">Email</label>
-            <Field name="email" id="email" className="border" />
+            <Field name="email" id="email" className="border px-2 py-1 rounded" />
             {errors.email && touched.email ? (
               <FormErrorDisplay message={errors.email} />
             ) : null}
           </div>
-          <div>
+          <div className="flex gap-2 flex-col">
             <label htmlFor="firstName">First Name</label>
-            <Field name="firstName" id="firstName" />
+            <Field name="firstName" id="firstName" className="border px-2 py-1 rounded" />
             {errors.firstName && touched.firstName ? (
               <FormErrorDisplay message={errors.firstName} />
             ) : null}
           </div>
-          <div>
+          <div className="flex gap-2 flex-col">
             <label htmlFor="lastName">Last Name</label>
-            <Field name="lastName" />
+            <Field name="lastName" id="lastName" className="border px-2 py-1 rounded" />
             {errors.lastName && touched.lastName ? (
               <FormErrorDisplay message={errors.lastName} />
             ) : null}
           </div>
-          <div>
+          <div className="flex gap-2 flex-col">
             <label htmlFor="password">Password</label>
-            <Field name="password" />
+            <Field name="password" id="password" className="border px-2 py-1 rounded" />
             {errors.password && touched.password ? (
               <FormErrorDisplay message={errors.password} />
             ) : null}
           </div>
-          <div>
+          <div className="flex gap-2 flex-col">
             <label htmlFor="passwordConfirmation">Confirm Password</label>
-            <Field name="passwordConfirmation" />
+            <Field
+              name="passwordConfirmation"
+              id="passwordConfirmation"
+              className="border px-2 py-1 rounded"
+            />
             {errors.passwordConfirmation && touched.passwordConfirmation ? (
               <FormErrorDisplay message={errors.passwordConfirmation} />
             ) : null}
           </div>
           <button
-            className="border px-4 py-2 bg-blue-700 text-white rounded"
+            className="px-4 py-2 bg-blue-700 text-white rounded w-full"
             type="submit"
           >
             Sign Up
