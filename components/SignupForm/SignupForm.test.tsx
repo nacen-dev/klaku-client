@@ -6,7 +6,7 @@ describe("Signup Form", () => {
   const submit = jest.fn();
 
   it("should have a email, first name, last name, password, confirm password fields, and signup button", () => {
-    render(<SignupForm submit={submit} />);
+    render(<SignupForm submit={submit} signUpMessage="" errorMessage="" />);
 
     const email = screen.getByLabelText(/email/i);
     const firstName = screen.getByLabelText(/first name/i);
@@ -24,7 +24,7 @@ describe("Signup Form", () => {
   });
 
   it("should allow the user to signup with their information", async () => {
-    render(<SignupForm submit={submit} />);
+    render(<SignupForm submit={submit} signUpMessage="" errorMessage=""/>);
 
     const email = screen.getByLabelText(/email/i);
     const firstName = screen.getByLabelText(/first name/i);
