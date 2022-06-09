@@ -4,7 +4,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   message: string;
 }
 
-export const FormErrorDisplay = ({ message, className }: Props) => {
+export const ErrorText = ({ message, className }: Props) => {
   return (
     <div className={`text-red-600 ${className ? className : ""}`}>
       {message}
