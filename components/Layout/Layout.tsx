@@ -12,7 +12,7 @@ const Layout = ({ children }: Props) => {
         <title>Klaku Clothing</title>
       </Head>
       <header>Nav</header>
-      <main>{children}</main>
+      {children}
       <footer>Footer</footer>
     </div>
   );
