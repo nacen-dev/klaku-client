@@ -1,5 +1,6 @@
 import Head from "next/head";
 import React from "react";
+import { Header } from "../Header/Header";
 
 interface Props {
   children: React.ReactNode;
@@ -11,7 +12,7 @@ const Layout = ({ children }: Props) => {
       <Head>
         <title>Klaku Clothing</title>
       </Head>
-      <header>Nav</header>
+      <Header />
       {children}
       <footer>Footer</footer>
     </div>
