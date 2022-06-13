@@ -9,7 +9,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 export const Nav = ({ className, isLoggedIn, listClass }: Props) => {
   return (
     <nav className={className}>
-      <ul className={`flex gap-2 ${listClass}`}>
+      <ul className={`${listClass}`}>
         <li>
           <Link href="/shop">Shop</Link>
         </li>
