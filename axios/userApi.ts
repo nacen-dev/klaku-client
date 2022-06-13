@@ -16,5 +16,4 @@ export const registerUser = (userData: SignUpFormData) => {
   return api
     .post("/users", { ...userData })
     .then((res) => res)
-    .catch((error) => error.response);
 };

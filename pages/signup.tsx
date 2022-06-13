@@ -1,3 +1,4 @@
+import axios from "axios";
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useMutation } from "react-query";
@@ -7,7 +8,7 @@ import { SignupForm } from "../components/SignupForm/SignupForm";
 const Signup: NextPage = () => {
   const [signUpMessage, setSignUpMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { mutate } = useMutation(registerUser, {
+  const { mutate, error } = useMutation(registerUser, {
     onSuccess: (responseData) => {
       console.log(responseData);
 
@@ -15,12 +16,18 @@ const Signup: NextPage = () => {
         setErrorMessage("");
         setSignUpMessage(responseData.data.message);
       } else {
-        setErrorMessage(responseData.data.error);
-        setSignUpMessage("");
       }
     },
     onError: () => {
-      setErrorMessage("An error has occurred");
+      if (axios.isAxiosError(error)) {
+        if (!error.response?.data) {
+          setErrorMessage("An error has occurred");
+          setSignUpMessage("");
+        } else {
+          setErrorMessage(error.response?.data as string);
+          setSignUpMessage("");
+        }
+      }
     },
   });
 
