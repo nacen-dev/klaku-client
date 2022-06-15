@@ -13,7 +13,7 @@ export const Sidebar = ({ show, close, className }: Props) => {
     <div
       className={`${
         show ? "translate-x-0" : "translate-x-full"
-      } fixed w-[200px] h-full right-0 top-0 bg-slate-700 text-white transition-transform duration-300 ${className}`}
+      } fixed w-[200px] h-full right-0 top-0 z-10 bg-slate-700 text-white transition-transform duration-300 ${className}`}
     >
       <aside className="p-6">
         <div className="mb-4 flex gap-4 items-center justify-between text-xl">
