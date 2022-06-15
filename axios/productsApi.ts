@@ -28,4 +28,4 @@ export const getAllProducts = (): Promise<IProduct[]> =>
   api.get("/products").then((res) => res.data);
 
 export const getProductById = (productId: string): Promise<IProduct> =>
-  api.get(`/products/${productId}`);
+  api.get(`/products/${productId}`).then((res) => res.data);
