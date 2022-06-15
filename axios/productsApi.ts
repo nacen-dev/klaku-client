@@ -16,7 +16,7 @@ export interface IProduct {
   category?: string;
   rating: number;
   stock: number;
-  reviews?: IReview[];
+  reviews: IReview[];
   price: number;
 }
 
