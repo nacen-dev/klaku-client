@@ -21,7 +21,7 @@ export const Header = (props: Props) => {
   return (
     <>
       <div className="py-4 px-6 flex justify-between items-center bg-slate-700 text-white text-xl h-[10vh]">
-        <p>Klaku Logo</p>
+        <p>Klaku Clothing</p>
         <div className="flex justify-between gap-4">
           <Nav isLoggedIn={false} className="md-max:hidden" listClass="flex gap-4"/>
           <Hamburger click={toggleHamburger} className="md:hidden" />
