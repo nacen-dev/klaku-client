@@ -14,18 +14,20 @@ const api = axios.create({
   headers: { "Content-Type": "application/json" },
 });
 
-export const registerUser = (userData: SignUpFormData) => {
-  return api.post("/users", { ...userData }).then((res) => res);
+export const registerUser = async (userData: SignUpFormData) => {
+  const res = await api.post("/users", { ...userData });
+  return res;
 };
 
-export const loginUser = (loginData: { email: string; password: string }) => {
-  return api
-    .post("/sessions", JSON.stringify({ ...loginData }))
-    .then((res) => res);
+export const loginUser = async (loginData: { email: string; password: string }) => {
+  const res = await api
+    .post("/sessions", JSON.stringify({ ...loginData }));
+  return res;
 };
 
-export const logoutUser = (auth: string) => {
-  return api
-    .delete("/sessions", { headers: { Authorization: auth } })
-    .then((res) => res);
+export const logoutUser = async (auth: string) => {
+  const res = await api
+    .delete("/sessions", { headers: { Authorization: auth } });
+  return res;
 };
+
