@@ -21,7 +21,7 @@ const Login: NextPage<Props> = () => {
     mutate(userData, {
       onSuccess: (responseData) => {
         setErrorMessage("");
-        setAuth(responseData.data.accessToken);
+        setAuth({ accessToken: responseData.data.accessToken });
         if (router.query && router.query.from) {
           router.push(router.query.from as string);
         } else {
