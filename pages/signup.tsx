@@ -10,12 +10,9 @@ const Signup: NextPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { mutate, error } = useMutation(registerUser, {
     onSuccess: (responseData) => {
-      console.log(responseData);
-
       if (responseData.status === 200) {
         setErrorMessage("");
         setSignUpMessage(responseData.data.message);
-      } else {
       }
     },
     onError: () => {
