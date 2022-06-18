@@ -22,7 +22,6 @@ export const Sidebar = ({ show, close, className }: Props) => {
         </div>
         <Nav
           className="flex-col flex text-xl"
-          isLoggedIn={false}
           listClass="flex-col flex gap-2"
         />
       </aside>
