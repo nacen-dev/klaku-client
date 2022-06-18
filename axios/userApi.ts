@@ -27,7 +27,6 @@ export const loginUser = async (loginData: { email: string; password: string }) 
 
 export const logoutUser = async (auth: string) => {
   const res = await api
-    .delete("/sessions", { headers: { Authorization: auth } });
+    .delete("/sessions", { headers: { Authorization: `Bearer ${auth}` } });
   return res;
 };
-
