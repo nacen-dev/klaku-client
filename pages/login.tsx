@@ -7,14 +7,14 @@ import { useMutation } from "react-query";
 import { loginUser } from "../axios/authApi";
 import { ErrorText } from "../components/ErrorText/ErrorText";
 import { LoginForm } from "../components/LoginForm/LoginForm";
-import { useStateContext } from "../context/StateContext";
+import { useGlobalState } from "../state";
 
 interface Props {}
 
 const Login: NextPage<Props> = () => {
   const { mutate, error } = useMutation(loginUser);
   const [errorMessage, setErrorMessage] = useState("");
-  const { setAuth } = useStateContext();
+  const [ auth, setAuth] = useGlobalState("auth")
   const router = useRouter();
 
   const handleLogin = async (userData: { email: string; password: string }) => {

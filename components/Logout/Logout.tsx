@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { logoutUser } from "../../axios/authApi";
-import { useStateContext } from "../../context/StateContext";
+import { useGlobalState } from "../../state";
 
 interface Props {}
 
 export const Logout = (props: Props) => {
-  const { auth, setAuth } = useStateContext();
+  const [auth, setAuth] = useGlobalState("auth");
   const router = useRouter();
 
   const handleLogout = async () => {

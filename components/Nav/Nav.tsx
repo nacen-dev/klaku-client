@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { useStateContext } from "../../context/StateContext";
+import { useGlobalState } from "../../state";
 import { Logout } from "../Logout/Logout";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
 }
 
 export const Nav = ({ className, listClass }: Props) => {
-  const { auth } = useStateContext();
+  const [ auth, setAuth ] = useGlobalState("auth");
 
   return (
     <nav className={className}>
@@ -19,7 +19,7 @@ export const Nav = ({ className, listClass }: Props) => {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
-        {auth ? (
+        {auth.accessToken ? (
           <li>
             <Logout />
           </li>

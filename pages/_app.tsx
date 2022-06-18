@@ -13,11 +13,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <StateProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </StateProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Hydrate>
     </QueryClientProvider>
   );
