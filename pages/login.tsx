@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { loginUser } from "../axios/userApi";
+import { loginUser } from "../axios/authApi";
 import { ErrorText } from "../components/ErrorText/ErrorText";
 import { LoginForm } from "../components/LoginForm/LoginForm";
 import { useStateContext } from "../context/StateContext";

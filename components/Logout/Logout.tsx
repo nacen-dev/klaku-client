@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { logoutUser } from "../../axios/userApi";
+import { logoutUser } from "../../axios/authApi";
 import { useStateContext } from "../../context/StateContext";
 
 interface Props {}
