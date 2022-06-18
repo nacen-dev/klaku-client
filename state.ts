@@ -18,7 +18,8 @@ interface IState {
   cart: ICart[];
 }
 
-export const { useGlobalState } = createGlobalState<IState>({
-  auth: { accessToken: "" },
-  cart: [],
-});
+export const { useGlobalState, getGlobalState, setGlobalState } =
+  createGlobalState<IState>({
+    auth: { accessToken: "" },
+    cart: [],
+  });
