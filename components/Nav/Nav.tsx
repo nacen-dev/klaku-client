@@ -1,12 +1,15 @@
 import Link from "next/link";
 import React from "react";
+import { useStateContext } from "../../context/StateContext";
+import { Logout } from "../Logout/Logout";
 
 interface Props extends React.HTMLAttributes<HTMLElement> {
-  isLoggedIn: boolean;
   listClass?: string;
 }
 
-export const Nav = ({ className, isLoggedIn, listClass }: Props) => {
+export const Nav = ({ className, listClass }: Props) => {
+  const { auth } = useStateContext();
+
   return (
     <nav className={className}>
       <ul className={`${listClass}`}>
@@ -16,7 +19,11 @@ export const Nav = ({ className, isLoggedIn, listClass }: Props) => {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
-        {isLoggedIn ? null : (
+        {auth ? (
+          <li>
+            <Logout />
+          </li>
+        ) : (
           <li>
             <Link href="/login">Login</Link>
           </li>
