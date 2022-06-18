@@ -6,9 +6,13 @@ import {
   useState,
 } from "react";
 
+interface IAuth {
+  accessToken: string;
+}
+
 interface IStateContext {
-  auth: string;
-  setAuth: Dispatch<SetStateAction<string>>;
+  auth: IAuth;
+  setAuth: Dispatch<SetStateAction<IAuth>>;
   addToCart: (productId: string, quantity: number) => void;
   deleteFromCart: (productId: string) => void;
   removeItemFromCart: (productId: string, quantity: number) => void;
@@ -30,7 +34,7 @@ interface Props {
 }
 
 export const StateProvider = ({ children }: Props) => {
-  const [auth, setAuth] = useState("");
+  const [auth, setAuth] = useState({ accessToken: "" });
   const [cart, setCart] = useState<ICart>({
     items: [],
   });
