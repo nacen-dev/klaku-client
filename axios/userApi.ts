@@ -23,3 +23,9 @@ export const loginUser = (loginData: { email: string; password: string }) => {
     .post("/sessions", JSON.stringify({ ...loginData }))
     .then((res) => res);
 };
+
+export const logoutUser = (auth: string) => {
+  return api
+    .delete("/sessions", { headers: { Authorization: auth } })
+    .then((res) => res);
+};
