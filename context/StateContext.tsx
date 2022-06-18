@@ -6,7 +6,7 @@ import {
   useState,
 } from "react";
 
-interface IAuth {
+export interface IAuth {
   accessToken: string;
 }
 
