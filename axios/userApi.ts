@@ -10,10 +10,16 @@ export type SignUpFormData = {
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  withCredentials: true,
+  headers: { "Content-Type": "application/json" },
 });
 
 export const registerUser = (userData: SignUpFormData) => {
+  return api.post("/users", { ...userData }).then((res) => res);
+};
+
+export const loginUser = (loginData: { email: string; password: string }) => {
   return api
-    .post("/users", { ...userData })
-    .then((res) => res)
+    .post("/sessions", JSON.stringify({ ...loginData }))
+    .then((res) => res);
 };
