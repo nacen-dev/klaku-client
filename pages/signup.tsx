@@ -32,12 +32,15 @@ const Signup: NextPage = () => {
   });
 
   return (
-    <div className="flex justify-center items-center h-[80%]">
-      <SignupForm
-        submit={mutate}
-        signUpMessage={signUpMessage}
-        errorMessage={errorMessage}
-      />
+    <div className="h-[90vh] px-[10%] sm:px-[15%] md:px-[20%] flex flex-col justify-center">
+      <h1 className="text-3xl font-bold text-center mb-8">Signup</h1>
+      <div className="w-full max-w-[400px] mr-auto ml-auto">
+        <SignupForm
+          submit={mutate}
+          signUpMessage={signUpMessage}
+          errorMessage={errorMessage}
+        />
+      </div>
     </div>
   );
 };
