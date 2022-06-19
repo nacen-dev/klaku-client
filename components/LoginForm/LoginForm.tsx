@@ -61,7 +61,7 @@ export const LoginForm = ({ login }: Props) => {
             ) : null}
           </div>
           <button
-            className="mt-4 px-4 py-2 bg-slate-700 hover:bg-blue-700 text-white rounded w-full"
+            className="mt-4 px-4 py-2 bg-slate-700 hover:bg-sky-700 text-white rounded w-full"
             type="submit"
           >
             Login

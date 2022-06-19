@@ -61,7 +61,7 @@ function Product({}: Props) {
         <p className="text-lg">${product.price}</p>
         {product.color && <p>Color: {capitalize(product.color)}</p>}
         {product.size && <p>Size: ${product.size}</p>}
-        <button className="rounded border w-full px-4 py-2 cursor-pointer bg-slate-700 text-white hover:bg-blue-600 uppercase">
+        <button className="rounded border w-full px-4 py-2 cursor-pointer bg-slate-700 text-white hover:bg-sky-700 uppercase">
           Add to cart
         </button>
         <div className="border-2 p-2 px-6 mt-4">
