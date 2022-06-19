@@ -4,6 +4,7 @@ import { QueryClientProvider, QueryClient, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
 import { Layout } from "../components/Layout/Layout";
+import { PersistLogin } from "../hoc/PersistLogin";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ReactQueryDevtools initialIsOpen={false} />
         <Layout>
-          <Component {...pageProps} />
+          <PersistLogin>
+            <Component {...pageProps} />
+          </PersistLogin>
         </Layout>
       </Hydrate>
     </QueryClientProvider>
