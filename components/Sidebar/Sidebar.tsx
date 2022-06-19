@@ -22,7 +22,7 @@ export const Sidebar = ({
             show ? "" : "hidden"
           } ${overlayClass ? overlayClass : ""}`}
           onClick={close}
-        ></div>
+        />
         <div
           className={`${
             show ? "translate-x-0" : "translate-x-full"
