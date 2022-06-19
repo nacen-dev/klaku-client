@@ -10,21 +10,21 @@ export type SignUpFormData = {
   passwordConfirmation: string;
 };
 
-export const authAPI = axios.create({
+export const axiosAPI = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
 
 export const getRefreshToken = async () => {
-  const res = await authAPI.post<IAuth>("/sessions/refresh");
+  const res = await axiosAPI.post<IAuth>("/sessions/refresh");
   return res.data;
 };
 
 const getAuth = () => getGlobalState("auth");
 const setAuth = (value: IAuth) => setGlobalState("auth", value);
 
-authAPI.interceptors.request.use(
+axiosAPI.interceptors.request.use(
   (config) => {
     if (config.headers && !config.headers["Authorization"]) {
       config.headers["Authorization"] = `Bearer ${getAuth().accessToken}`;
@@ -34,7 +34,7 @@ authAPI.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-authAPI.interceptors.response.use(
+axiosAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalConfig = error.config;
@@ -44,7 +44,7 @@ authAPI.interceptors.response.use(
       try {
         const refreshToken = await getRefreshToken();
         setAuth(refreshToken);
-        return authAPI(originalConfig);
+        return axiosAPI(originalConfig);
       } catch (_error) {
         console.log("caught", _error);
         return Promise.reject(_error);
@@ -55,7 +55,7 @@ authAPI.interceptors.response.use(
 );
 
 export const registerUser = async (userData: SignUpFormData) => {
-  const res = await authAPI.post("/users", { ...userData });
+  const res = await axiosAPI.post("/users", { ...userData });
   return res;
 };
 
@@ -63,18 +63,44 @@ export const loginUser = async (loginData: {
   email: string;
   password: string;
 }) => {
-  const res = await authAPI.post("/sessions", JSON.stringify({ ...loginData }));
+  const res = await axiosAPI.post("/sessions", JSON.stringify({ ...loginData }));
   return res;
 };
 
 export const logoutUser = async (auth: IAuth) => {
-  const res = await authAPI.delete("/sessions", {
+  const res = await axiosAPI.delete("/sessions", {
     headers: { Authorization: `Bearer ${auth.accessToken}` },
   });
   return res;
 };
 
 export const getOrders = async () => {
-  const res = await authAPI.get("/orders");
+  const res = await axiosAPI.get("/orders");
   return res;
 };
+
+interface IReview {
+  name: string;
+  comment: string;
+  rating: number;
+}
+
+export interface IProduct {
+  _id: string;
+  name: string;
+  description: string;
+  image: string;
+  size?: string;
+  color?: string;
+  category?: string;
+  rating: number;
+  stock: number;
+  reviews: IReview[];
+  price: number;
+}
+
+export const getAllProducts = (): Promise<IProduct[]> =>
+  axiosAPI.get("/products").then((res) => res.data);
+
+export const getProductById = (productId: string): Promise<IProduct> =>
+  axiosAPI.get(`/products/${productId}`).then((res) => res.data);

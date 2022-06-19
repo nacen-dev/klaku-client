@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ErrorText } from "../ErrorText/ErrorText";
-import { SignUpFormData } from "../../axios/authApi";
+import { SignUpFormData } from "../../axios/axiosAPI";
 
 interface Props {
   submit: (userData: SignUpFormData) => void;

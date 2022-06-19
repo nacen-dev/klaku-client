@@ -2,7 +2,7 @@ import axios from "axios";
 import type { NextPage } from "next";
 import { useState } from "react";
 import { useMutation } from "react-query";
-import { registerUser } from "../axios/authApi";
+import { registerUser } from "../axios/axiosAPI";
 import { SignupForm } from "../components/SignupForm/SignupForm";
 
 const Signup: NextPage = () => {

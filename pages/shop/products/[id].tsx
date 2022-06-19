@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
-import { getProductById } from "../../../axios/productsApi";
+import { getProductById } from "../../../axios/axiosAPI";
 import { capitalize } from "../../../utils/capitalize";
 
 interface Props {}

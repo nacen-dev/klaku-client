@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { logoutUser } from "../../axios/authApi";
+import { logoutUser } from "../../axios/axiosAPI";
 import { useGlobalState } from "../../state";
 
 interface Props {}

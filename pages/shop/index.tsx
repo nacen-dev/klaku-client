@@ -1,6 +1,6 @@
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
-import { getAllProducts } from "../../axios/productsApi";
+import { getAllProducts } from "../../axios/axiosAPI";
 import { ProductPreview } from "../../components/ProductPreview/ProductPreview";
 
 export const getStaticProps = async () => {
