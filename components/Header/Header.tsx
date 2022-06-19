@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MdClose } from "react-icons/md";
 import { Cart } from "../Cart/Cart";
 import { Hamburger } from "../Hamburger/Hamburger";
 import { Nav } from "../Nav/Nav";
@@ -22,15 +23,24 @@ export const Header = (props: Props) => {
       <div className="py-4 px-6 flex justify-between items-center bg-slate-700 text-white text-xl h-[10vh]">
         <p>Klaku Clothing</p>
         <div className="flex justify-between gap-4">
-          <Nav
-            className="md-max:hidden"
-            listClass="flex gap-4"
-          />
+          <Nav className="md-max:hidden" listClass="flex gap-4" />
           <Hamburger click={toggleHamburger} className="md:hidden" />
           <Cart />
         </div>
       </div>
-      <Sidebar show={show} close={closeMenu} className="md:hidden" />
+      <Sidebar show={show} className="md:hidden" close={closeMenu}>
+        <aside className="p-6">
+          <div className="mb-4 flex gap-4 items-center justify-between text-xl">
+            <p>Menu</p>
+            <MdClose className="text-2xl cursor-pointer" onClick={closeMenu} />
+          </div>
+          <Nav
+            className="flex-col flex text-xl"
+            listClass="flex-col flex gap-2"
+            onNavItemClick={closeMenu}
+          />
+        </aside>
+      </Sidebar>
     </>
   );
 };
