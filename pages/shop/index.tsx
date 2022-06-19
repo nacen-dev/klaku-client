@@ -1,6 +1,7 @@
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getAllProducts } from "../../axios/axiosAPI";
+import { Loader } from "../../components/Loader/Loader";
 import { ProductPreview } from "../../components/ProductPreview/ProductPreview";
 
 export const getStaticProps = async () => {
@@ -22,7 +23,7 @@ const Shop = () => {
   );
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <Loader />;
   }
 
   if (isError) {
@@ -30,17 +31,12 @@ const Shop = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 bg-neutral-200">
       <div className="h-full grid grid-cols-4 gap-4 gap-y-8">
         {data?.map((product) => (
           <ProductPreview
             key={product._id}
-            productPreviewData={{
-              _id: product._id,
-              image: product.image,
-              name: product.name,
-              price: product.price,
-            }}
+            productPreviewData={product}
           />
         ))}
       </div>
