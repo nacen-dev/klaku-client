@@ -1,30 +1,36 @@
 import React from "react";
-import { Nav } from "../Nav/Nav";
-import { MdClose } from "react-icons/md";
+import Portal from "../../hoc/Portal";
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   show: boolean;
   close: () => void;
-  className: string;
+  overlayClass?: string;
 }
 
-export const Sidebar = ({ show, close, className }: Props) => {
+export const Sidebar = ({
+  show,
+  className,
+  children,
+  close,
+  overlayClass,
+}: Props) => {
   return (
-    <div
-      className={`${
-        show ? "translate-x-0" : "translate-x-full"
-      } fixed w-[200px] h-full right-0 top-0 z-10 bg-slate-700 text-white transition-transform duration-300 ${className}`}
-    >
-      <aside className="p-6">
-        <div className="mb-4 flex gap-4 items-center justify-between text-xl">
-          <p>Menu</p>
-          <MdClose className="text-2xl cursor-pointer" onClick={close} />
+    <Portal>
+      <>
+        <div
+          className={`bg-black opacity-50 inset-0 fixed z-10 ${
+            show ? "" : "hidden"
+          } ${overlayClass ? overlayClass : ""}`}
+          onClick={close}
+        ></div>
+        <div
+          className={`${
+            show ? "translate-x-0" : "translate-x-full"
+          } fixed w-[200px] h-full right-0 top-0 z-20 bg-slate-700 text-white transition-transform duration-300 ${className}`}
+        >
+          {children}
         </div>
-        <Nav
-          className="flex-col flex text-xl"
-          listClass="flex-col flex gap-2"
-        />
-      </aside>
-    </div>
+      </>
+    </Portal>
   );
 };
