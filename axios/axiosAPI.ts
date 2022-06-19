@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IAuth } from "../context/StateContext";
-import { getGlobalState, setGlobalState } from "../state";
+import { getGlobalState, IProduct, setGlobalState } from "../state";
 
 export type SignUpFormData = {
   firstName: string;
@@ -63,7 +63,10 @@ export const loginUser = async (loginData: {
   email: string;
   password: string;
 }) => {
-  const res = await axiosAPI.post("/sessions", JSON.stringify({ ...loginData }));
+  const res = await axiosAPI.post(
+    "/sessions",
+    JSON.stringify({ ...loginData })
+  );
   return res;
 };
 
@@ -78,26 +81,6 @@ export const getOrders = async () => {
   const res = await axiosAPI.get("/orders");
   return res;
 };
-
-interface IReview {
-  name: string;
-  comment: string;
-  rating: number;
-}
-
-export interface IProduct {
-  _id: string;
-  name: string;
-  description: string;
-  image: string;
-  size?: string;
-  color?: string;
-  category?: string;
-  rating: number;
-  stock: number;
-  reviews: IReview[];
-  price: number;
-}
 
 export const getAllProducts = (): Promise<IProduct[]> =>
   axiosAPI.get("/products").then((res) => res.data);
