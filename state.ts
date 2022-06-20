@@ -119,6 +119,13 @@ export const handleQuantityChange = (
   }
 };
 
+export const cartItemsCount = () => {
+  const cart = getGlobalState("cart");
+  return cart.reduce((count, currentProduct) => {
+    return count + currentProduct.quantity;
+  }, 0);
+};
+
 export const reduceItemFromCart = (
   cartItem: ICartItem,
   quantity: number = 1
