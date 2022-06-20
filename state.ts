@@ -1,3 +1,4 @@
+import { SetStateAction } from "react";
 import { createGlobalState } from "react-hooks-global-state";
 
 export interface IAuth {
@@ -33,11 +34,36 @@ interface IState {
   cart: ICartItem[];
 }
 
-export const { useGlobalState, getGlobalState, setGlobalState } =
-  createGlobalState<IState>({
-    auth: { accessToken: "" },
-    cart: [],
-  });
+const initialState: IState = {
+  auth: { accessToken: "" },
+  cart:
+    (typeof window !== "undefined" &&
+      JSON.parse(localStorage.getItem("cart") as string)) ||
+    [],
+};
+
+export const state = createGlobalState<IState>(initialState);
+export const { getGlobalState } = state;
+
+export const setGlobalState: <StateKey extends keyof IState>(
+  stateKey: StateKey,
+  update: SetStateAction<IState[StateKey]>
+) => void = (key, update) => {
+  state.setGlobalState(key, update);
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, JSON.stringify(state.getGlobalState(key)));
+  }
+};
+
+export const useGlobalState: <StateKey extends keyof IState>(
+  stateKey: StateKey
+) => readonly [
+  IState[StateKey],
+  (update: SetStateAction<IState[StateKey]>) => void
+] = (key) => [
+  state.useGlobalState(key)[0],
+  (update) => setGlobalState(key, update),
+];
 
 export const indexOfProductInCart = (cart: ICartItem[], productId: string) => {
   for (let i = 0; i < cart.length; i++) {
