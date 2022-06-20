@@ -126,6 +126,13 @@ export const cartItemsCount = () => {
   }, 0);
 };
 
+export const calculateSubTotal = () => {
+  const cart = getGlobalState("cart");
+  return cart.reduce((price, currentProduct) => {
+    return price + currentProduct.product.price * currentProduct.quantity;
+  }, 0);
+};
+
 export const reduceItemFromCart = (
   cartItem: ICartItem,
   quantity: number = 1
