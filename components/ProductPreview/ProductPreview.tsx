@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { addToCart, IProduct } from "../../state";
+import { Button } from "../Button/Button";
 
 interface Props {
   productPreviewData: IProduct;
@@ -22,12 +23,10 @@ export const ProductPreview = ({ productPreviewData: product }: Props) => {
           <p>{product.name}</p>
           <p>${product.price}</p>
         </div>
-        <button
-          className="w-full bg-slate-700 text-white px-4 py-2 mb-2 hover:bg-sky-700"
-          onClick={() => addToCart(product)}
-        >
-          Add to Cart
-        </button>
+
+        <Button className="mb-2" onClick={() => addToCart(product)}>
+          Add to cart
+        </Button>
       </div>
     </div>
   );

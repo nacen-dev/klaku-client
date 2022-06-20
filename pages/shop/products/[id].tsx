@@ -1,9 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getProductById } from "../../../axios/axiosAPI";
+import { Button } from "../../../components/Button/Button";
+import { addToCart } from "../../../state";
 import { capitalize } from "../../../utils/capitalize";
 
 interface Props {}
@@ -44,8 +47,11 @@ function Product({}: Props) {
 
   if (isError) {
     return (
-      <div className="h-screen w-full justify-center items-center flex">
-        <p>Could not find the product</p>
+      <div className="h-screen w-full justify-center items-center flex flex-col">
+        <p className="text-2xl">Could not find the product</p>
+        <button className="">
+          <Link href="/shop">Back to shop</Link>
+        </button>
       </div>
     );
   }
@@ -61,9 +67,13 @@ function Product({}: Props) {
         <p className="text-lg">${product.price}</p>
         {product.color && <p>Color: {capitalize(product.color)}</p>}
         {product.size && <p>Size: ${product.size}</p>}
-        <button className="rounded border w-full px-4 py-2 cursor-pointer bg-slate-700 text-white hover:bg-sky-700 uppercase">
+        <Button
+          className="rounded uppercase"
+          onClick={() => addToCart(product)}
+        >
           Add to cart
-        </button>
+        </Button>
+
         <div className="border-2 p-2 px-6 mt-4">
           <h3 className="text-xl text-center font-semibold mb-6">
             Customer Reviews
