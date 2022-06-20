@@ -1,11 +1,19 @@
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
-import { Cart } from "../Cart/Cart";
+import { Cart, CartProps } from "../Cart/Cart";
 import { Hamburger } from "../Hamburger/Hamburger";
 import { Nav } from "../Nav/Nav";
 import { Sidebar } from "../Sidebar/Sidebar";
 
 interface Props {}
+
+const DynamicCart = dynamic<CartProps>(
+  () => import("../Cart/Cart").then((mod) => mod.Cart),
+  {
+    ssr: false,
+  }
+);
 
 export const Header = (props: Props) => {
   const [show, setShow] = useState(false);
@@ -25,7 +33,7 @@ export const Header = (props: Props) => {
         <div className="flex justify-between gap-4">
           <Nav className="md-max:hidden" listClass="flex gap-4" />
           <Hamburger click={toggleHamburger} className="md:hidden" />
-          <Cart />
+          <DynamicCart />
         </div>
       </div>
       <Sidebar show={show} className="md:hidden" close={closeMenu}>
