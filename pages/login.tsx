@@ -25,7 +25,7 @@ const Login: NextPage<Props> = () => {
         if (router.query && router.query.from) {
           router.push(router.query.from as string);
         } else {
-          router.push("/");
+          router.push("/shop");
         }
       },
       onError: (error) => {
