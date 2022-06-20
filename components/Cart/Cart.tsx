@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { BsBag } from "react-icons/bs";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { BsArrowLeft } from "react-icons/bs";
-import { useGlobalState } from "../../state";
+import { calculateSubTotal, cartItemsCount, useGlobalState } from "../../state";
 import { CartItems } from "./CartItems";
+import { Button } from "../Button/Button";
 
 export interface CartProps {}
 
@@ -15,13 +16,16 @@ export const Cart: React.FC<CartProps> = (props) => {
 
   const closeCart = () => setShowCart(false);
 
+  const itemsCount = cartItemsCount();
+  const subTotal = calculateSubTotal();
+
   return (
     <>
       <div className="flex cursor-pointer gap-3" onClick={openCart}>
         <p>Cart</p>
         <BsBag className="text-2xl relative" />
         <span className="bg-red-700 text-white rounded-xl px-1 text-xs flex items-center justify-center min-w-[22px] absolute right-3">
-          {cart.length}
+          {itemsCount}
         </span>
       </div>
       <Sidebar
@@ -29,7 +33,7 @@ export const Cart: React.FC<CartProps> = (props) => {
         close={closeCart}
         className="max-w-[450px] !w-full"
       >
-        <div className="p-4">
+        <div className="p-4 flex flex-col h-full">
           <div className="flex items-center gap-4 mb-8">
             <BsArrowLeft
               className="text-4xl cursor-pointer"
@@ -37,7 +41,19 @@ export const Cart: React.FC<CartProps> = (props) => {
             />
             <p className="text-2xl mr-auto ml-auto">Your Cart</p>
           </div>
-          <CartItems cart={cart} />
+          <CartItems cart={cart} className="flex-grow" />
+          <div className="mt-8">
+            <div className="flex justify-between">
+              <span className="text-lg">
+                Subtotal{" "}
+                {itemsCount > 1 ? `${itemsCount} Items` : `${itemsCount} Item`}
+              </span>
+              <span className="text-lg">${subTotal}</span>
+            </div>
+            <Button className="mt-4 bg-white text-black hover:text-white">
+              Checkout
+            </Button>
+          </div>
         </div>
       </Sidebar>
     </>
