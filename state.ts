@@ -50,7 +50,7 @@ export const setGlobalState: <StateKey extends keyof IState>(
   update: SetStateAction<IState[StateKey]>
 ) => void = (key, update) => {
   state.setGlobalState(key, update);
-  if (typeof window !== "undefined") {
+  if (typeof window !== "undefined" && key !== "auth") {
     localStorage.setItem(key, JSON.stringify(state.getGlobalState(key)));
   }
 };
