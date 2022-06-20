@@ -5,9 +5,9 @@ import { BsArrowLeft } from "react-icons/bs";
 import { useGlobalState } from "../../state";
 import { CartItems } from "./CartItems";
 
-interface Props {}
+export interface CartProps {}
 
-export const Cart = (props: Props) => {
+export const Cart: React.FC<CartProps> = (props) => {
   const [showCart, setShowCart] = useState(false);
   const [cart, setCart] = useGlobalState("cart");
 
