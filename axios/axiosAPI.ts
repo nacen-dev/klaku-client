@@ -1,6 +1,5 @@
 import axios from "axios";
-import { IAuth } from "../context/StateContext";
-import { getGlobalState, IProduct, setGlobalState } from "../state";
+import { getGlobalState, IAuth, IProduct, setGlobalState } from "../state";
 
 export type SignUpFormData = {
   firstName: string;
