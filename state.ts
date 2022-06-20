@@ -80,7 +80,9 @@ export const addToCart = (product: IProduct, quantity: number = 1) => {
   if (index < 0) {
     updatedCart.push({ product, quantity });
   } else {
-    updatedCart[index].quantity += quantity;
+    if (updatedCart[index].quantity < product.stock) {
+      updatedCart[index].quantity += quantity;
+    }
   }
   setCart(updatedCart);
 };
