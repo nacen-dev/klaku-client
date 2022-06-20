@@ -41,7 +41,6 @@ export const { useGlobalState, getGlobalState, setGlobalState } =
 
 export const indexOfProductInCart = (cart: ICartItem[], productId: string) => {
   for (let i = 0; i < cart.length; i++) {
-    console.log("product id in cart", cart[i].product._id);
     if (cart[i].product._id === productId) return i;
   }
   return -1;
