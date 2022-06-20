@@ -59,3 +59,35 @@ export const addToCart = (product: IProduct, quantity: number = 1) => {
   }
   setCart(updatedCart);
 };
+
+export const deleteFromCart = (cartItem: ICartItem) => {
+  const cart = getGlobalState("cart");
+
+  const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
+  setCart(cart.filter((cItem) => cItem.product._id !== cartItem.product._id));
+};
+
+export const handleQuantityChange = (
+  cartItem: ICartItem,
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
+  const cart = getGlobalState("cart");
+  const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
+  const quantity = Number(event.target.value);
+
+  if (quantity === 0) {
+    deleteFromCart(cartItem);
+  } else {
+    setCart(
+      cart.map((cItem) =>
+        cItem.product._id === cartItem.product._id
+          ? {
+              ...cItem,
+              quantity:
+                quantity > cItem.product.stock ? cItem.product.stock : quantity,
+            }
+          : cItem
+      )
+    );
+  }
+};
