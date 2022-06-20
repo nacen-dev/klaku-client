@@ -12,11 +12,12 @@ import { AiOutlineDelete } from "react-icons/ai";
 
 interface Props {
   cart: ICartItem[];
+  className?: string;
 }
 
-export const CartItems = ({ cart }: Props) => {
+export const CartItems = ({ cart, className }: Props) => {
   return (
-    <ul className="flex flex-col gap-4">
+    <ul className={`flex flex-col gap-4 overflow-y-auto ${className ? className : ""}`}>
       {cart.map((cartItem) => (
         <li key={cartItem.product._id} className="flex">
           <div className="w-[150px] relative">
@@ -42,7 +43,7 @@ export const CartItems = ({ cart }: Props) => {
             </div>
 
             <div className="my-2">
-              <p className="mb-2">${cartItem.product.price}</p>
+              <p className="mb-2 text-lg">${cartItem.product.price}</p>
               <div className="flex gap-1 justify-between rounded-2xl border border-slate-200 p-1 w-[100px]">
                 <button
                   className="w-6 text-lg"
