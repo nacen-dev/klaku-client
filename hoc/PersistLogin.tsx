@@ -31,5 +31,15 @@ export const PersistLogin = ({ children }: Props) => {
     };
   }, []);
 
-  return <>{isLoading ? <Loader /> : children}</>;
+  return (
+    <>
+      {isLoading ? (
+        <div className="h-screen w-full flex justify-center items-center">
+          <Loader />
+        </div>
+      ) : (
+        children
+      )}
+    </>
+  );
 };

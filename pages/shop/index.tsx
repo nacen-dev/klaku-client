@@ -17,13 +17,14 @@ export const getStaticProps = async () => {
 };
 
 const Shop = () => {
-  const { isLoading, isError, data } = useQuery(
-    "products",
-    getAllProducts
-  );
+  const { isLoading, isError, data } = useQuery("products", getAllProducts);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="h-screen w-full justify-center items-center">
+        <Loader />;
+      </div>
+    );
   }
 
   if (isError) {
@@ -34,10 +35,7 @@ const Shop = () => {
     <div className="p-4 bg-neutral-200">
       <div className="h-full grid grid-cols-4 gap-4 gap-y-8">
         {data?.map((product) => (
-          <ProductPreview
-            key={product._id}
-            productPreviewData={product}
-          />
+          <ProductPreview key={product._id} productPreviewData={product} />
         ))}
       </div>
     </div>
