@@ -91,3 +91,24 @@ export const handleQuantityChange = (
     );
   }
 };
+
+export const reduceItemFromCart = (
+  cartItem: ICartItem,
+  quantity: number = 1
+) => {
+  const cart = getGlobalState("cart");
+  const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
+  const index = indexOfProductInCart(cart, cartItem.product._id);
+  if (index < 0) return;
+  if (cart[index].quantity - quantity <= 0) {
+    deleteFromCart(cartItem);
+  } else {
+    setCart(
+      cart.map((cItem) =>
+        cItem.product._id === cartItem.product._id
+          ? { ...cItem, quantity: cItem.quantity - quantity }
+          : cItem
+      )
+    );
+  }
+};
