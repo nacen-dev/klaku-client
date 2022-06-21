@@ -4,10 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
+import StarRatingComponent from "react-star-rating-component";
+
 import { getProductById } from "../../../axios/axiosAPI";
 import { Button } from "../../../components/Button/Button";
 import { addToCart } from "../../../state";
 import { capitalize } from "../../../utils/capitalize";
+import { FaStar } from "react-icons/fa";
 
 interface Props {}
 
@@ -61,12 +64,25 @@ function Product({}: Props) {
       <div className="flex-1 relative">
         <Image src={product.image} layout="fill" alt={product.name} />
       </div>
-      <div className="flex-1 p-4">
+      <div className="flex flex-col flex-1 p-4 gap-2">
         <h2 className="text-4xl mb-2">{product.name}</h2>
-        <p>{product.description}</p>
+        <p className="text-lg">{product.description}</p>
         <p className="text-lg">${product.price}</p>
-        {product.color && <p>Color: {capitalize(product.color)}</p>}
-        {product.size && <p>Size: ${product.size}</p>}
+        {product.color && (
+          <p className="text-lg">Color: {capitalize(product.color)}</p>
+        )}
+        {product.size && <p className="text-lg">Size: ${product.size}</p>}
+        <div className="flex gap-2 items-center">
+          <span className="text-lg">
+            {product.rating === 0 ? "No ratings yet" : "Ratings: "}
+          </span>
+          <StarRatingComponent
+            name="rating"
+            value={product.rating}
+            editing={false}
+            renderStarIcon={() => <FaStar className="text-xl" />}
+          />
+        </div>
         <Button
           className="rounded uppercase"
           onClick={() => addToCart(product)}
