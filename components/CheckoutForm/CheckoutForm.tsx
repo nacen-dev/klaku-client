@@ -25,7 +25,6 @@ export const CheckoutForm: FC<Props> = () => {
       // Make sure to disable form submission until Stripe.js has loaded.
       return;
     }
-
     setIsLoading(true);
 
     const { error } = await stripe.confirmPayment({
@@ -52,22 +51,28 @@ export const CheckoutForm: FC<Props> = () => {
     setIsLoading(false);
   };
 
-  return isLoading ? (
-    <div className="h-[320px] w-full flex items-center justify-center">
-      <Loader />
-    </div>
-  ) : (
+  return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <PaymentElement />
-      <Button
-        type="submit"
-        disabled={isLoading || !stripe || !elements}
-        className="mt-4 px-4 py-3 bg-sky-700 text-white rounded w-full"
-      >
-        <span id="button-text">Pay now</span>
-      </Button>
-      {/* Show any error or success messages */}
-      {message && <ErrorText message={message} />}
+      {/* Add class hidden instead of unrendering since stripe needs PaymentElement to be mounted*/}
+      <PaymentElement className={isLoading ? "hidden" : ""} />
+      {isLoading ? (
+        <div className="h-[320px] flex flex-col items-center justify-center">
+          <Loader />
+          <span className="text-xl">Loading...</span>
+        </div>
+      ) : (
+        <>
+          <Button
+            type="submit"
+            disabled={isLoading || !stripe || !elements}
+            className="mt-4 px-4 py-3 bg-sky-700 text-white rounded w-full"
+          >
+            <span id="button-text">Pay now</span>
+          </Button>
+          {/* Show any error or success messages */}
+          {message && <ErrorText className="text-center mt-4" message={message} />}
+        </>
+      )}
     </form>
   );
 };
