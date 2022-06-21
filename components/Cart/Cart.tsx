@@ -51,7 +51,7 @@ export const Cart: React.FC<CartProps> = (props) => {
               </span>
               <span className="text-lg">${subTotal}</span>
             </div>
-            <Button className="mt-4 bg-white text-black hover:text-white">
+            <Button className="mt-4 bg-sky-700">
               <Link href="/checkout">Checkout</Link>
             </Button>
           </div>
