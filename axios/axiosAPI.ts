@@ -1,5 +1,11 @@
 import axios from "axios";
-import { getGlobalState, IAuth, IProduct, setGlobalState } from "../state";
+import {
+  getGlobalState,
+  IAuth,
+  ICartItem,
+  IProduct,
+  setGlobalState,
+} from "../state";
 
 export type SignUpFormData = {
   firstName: string;
@@ -37,7 +43,6 @@ axiosAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalConfig = error.config;
-    console.log(error.response);
     if (error.response.status === 403 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
@@ -86,3 +91,10 @@ export const getAllProducts = (): Promise<IProduct[]> =>
 
 export const getProductById = (productId: string): Promise<IProduct> =>
   axiosAPI.get(`/products/${productId}`).then((res) => res.data);
+
+export const makePayment = async (items: ICartItem[]) => {
+  const res = await axiosAPI.post<{ clientSecret: string }>("/payment", {
+    items,
+  });
+  return res.data;
+};
