@@ -5,6 +5,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { calculateSubTotal, cartItemsCount, useGlobalState } from "../../state";
 import { CartItems } from "./CartItems";
 import { Button } from "../Button/Button";
+import Link from "next/link";
 
 export interface CartProps {}
 
@@ -51,7 +52,7 @@ export const Cart: React.FC<CartProps> = (props) => {
               <span className="text-lg">${subTotal}</span>
             </div>
             <Button className="mt-4 bg-white text-black hover:text-white">
-              Checkout
+              <Link href="/checkout">Checkout</Link>
             </Button>
           </div>
         </div>
