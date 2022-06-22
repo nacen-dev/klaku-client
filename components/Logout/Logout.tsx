@@ -10,8 +10,12 @@ export const Logout = (props: Props) => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    await logoutUser(auth);
-    setAuth({ accessToken: "" });
+    try {
+      await logoutUser(auth);
+      setAuth({ accessToken: "" });
+    } catch (error) {
+      console.error(error);
+    }
     router.push("/");
   };
 
