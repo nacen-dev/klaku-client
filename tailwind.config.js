@@ -8,6 +8,9 @@ module.exports = {
       screens: {
         "md-max": { max: "767px" },
       },
+      spacing: {
+        "fit-content": "calc(100vh - 10vh - 56px)"
+      }
     },
   },
   plugins: [],
