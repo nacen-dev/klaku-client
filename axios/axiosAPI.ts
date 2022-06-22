@@ -92,8 +92,14 @@ export const getAllProducts = (): Promise<IProduct[]> =>
 export const getProductById = (productId: string): Promise<IProduct> =>
   axiosAPI.get(`/products/${productId}`).then((res) => res.data);
 
-export const makePayment = async (items: ICartItem[]) => {
-  const res = await axiosAPI.post<{ clientSecret: string }>("/payment", {
+export const makePayment = async (
+  items: { productId: string; quantity: number }[]
+) => {
+  const res = await axiosAPI.post<{
+    clientSecret: string;
+    subTotal: number;
+    shippingPrice: number;
+  }>("/payment", {
     items,
   });
   return res.data;
