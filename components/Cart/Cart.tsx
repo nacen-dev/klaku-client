@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsBag } from "react-icons/bs";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { BsArrowLeft } from "react-icons/bs";
@@ -24,7 +24,7 @@ export const Cart: React.FC<CartProps> = (props) => {
     <>
       <div className="flex cursor-pointer gap-3" onClick={openCart}>
         <p>Cart</p>
-        <BsBag className="text-2xl relative" title="cart"/>
+        <BsBag className="text-2xl relative" title="cart" />
         <span className="bg-red-700 text-white rounded-xl px-1 text-xs flex items-center justify-center min-w-[22px] absolute right-3">
           {itemsCount}
         </span>
@@ -52,7 +52,9 @@ export const Cart: React.FC<CartProps> = (props) => {
               <span className="text-lg">${subTotal}</span>
             </div>
             <Button className="mt-4 bg-sky-700">
-              <Link href="/checkout">Checkout</Link>
+              <Link href="/checkout">
+                <a className="w-full block">Checkout</a>
+              </Link>
             </Button>
           </div>
         </div>
