@@ -76,7 +76,6 @@ export const indexOfProductInCart = (cart: ICartItem[], productId: string) => {
 
 export const addToCart = (product: IProduct, quantity: number = 1) => {
   const cart = getGlobalState("cart");
-  const setShowCart = (value: boolean) => setGlobalState("showCart", value);
   const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
   const index = indexOfProductInCart(cart, product._id);
   const updatedCart = [...cart];
@@ -88,7 +87,11 @@ export const addToCart = (product: IProduct, quantity: number = 1) => {
     }
   }
   setCart(updatedCart);
-  setShowCart(true);
+};
+
+export const addAndShowProductInCart = (product: IProduct) => {
+  addToCart(product);
+  setGlobalState("showCart", true);
 };
 
 export const deleteFromCart = (cartItem: ICartItem) => {
