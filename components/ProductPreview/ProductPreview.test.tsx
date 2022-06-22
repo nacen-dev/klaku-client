@@ -1,12 +1,16 @@
 import { render, screen } from "@testing-library/react";
-import { IProductPreview, ProductPreview } from "./ProductPreview";
+import { ProductPreview } from "./ProductPreview";
 
 describe("Product Preview", () => {
-  const product: IProductPreview = {
+  const product = {
     _id: "123",
     name: "coat",
     image: "test-url",
     price: 50,
+    description: "",
+    rating: 0,
+    stock: 9,
+    reviews: []
   };
   it("contains product name, price, product image", () => {
     render(<ProductPreview productPreviewData={product} />);
