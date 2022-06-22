@@ -10,7 +10,7 @@ import Link from "next/link";
 export interface CartProps {}
 
 export const Cart: React.FC<CartProps> = (props) => {
-  const [showCart, setShowCart] = useState(false);
+  const [showCart, setShowCart] = useGlobalState("showCart");
   const [cart, setCart] = useGlobalState("cart");
 
   const openCart = () => setShowCart(true);
