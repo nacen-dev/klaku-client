@@ -24,7 +24,7 @@ export const Cart: React.FC<CartProps> = (props) => {
     <>
       <div className="flex cursor-pointer gap-3" onClick={openCart}>
         <p>Cart</p>
-        <BsBag className="text-2xl relative" />
+        <BsBag className="text-2xl relative" title="cart"/>
         <span className="bg-red-700 text-white rounded-xl px-1 text-xs flex items-center justify-center min-w-[22px] absolute right-3">
           {itemsCount}
         </span>
