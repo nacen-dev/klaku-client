@@ -15,21 +15,26 @@ export type SignUpFormData = {
   passwordConfirmation: string;
 };
 
-export const axiosAPI = axios.create({
+export const publicAPI = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+  headers: { "Content-Type": "application/json" },
+});
+
+export const privateAPI = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
 
 export const getRefreshToken = async () => {
-  const res = await axiosAPI.post<IAuth>("/sessions/refresh");
+  const res = await privateAPI.post<IAuth>("/sessions/refresh");
   return res.data;
 };
 
 const getAuth = () => getGlobalState("auth");
 const setAuth = (value: IAuth) => setGlobalState("auth", value);
 
-axiosAPI.interceptors.request.use(
+privateAPI.interceptors.request.use(
   (config) => {
     if (config.headers && !config.headers["Authorization"]) {
       config.headers["Authorization"] = `Bearer ${getAuth().accessToken}`;
@@ -39,7 +44,7 @@ axiosAPI.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axiosAPI.interceptors.response.use(
+privateAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalConfig = error.config;
@@ -48,7 +53,7 @@ axiosAPI.interceptors.response.use(
       try {
         const refreshToken = await getRefreshToken();
         setAuth(refreshToken);
-        return axiosAPI(originalConfig);
+        return privateAPI(originalConfig);
       } catch (_error) {
         console.log("caught", _error);
         return Promise.reject(_error);
@@ -59,7 +64,7 @@ axiosAPI.interceptors.response.use(
 );
 
 export const registerUser = async (userData: SignUpFormData) => {
-  const res = await axiosAPI.post("/users", { ...userData });
+  const res = await publicAPI.post("/users", { ...userData });
   return res;
 };
 
@@ -67,7 +72,7 @@ export const loginUser = async (loginData: {
   email: string;
   password: string;
 }) => {
-  const res = await axiosAPI.post(
+  const res = await publicAPI.post(
     "/sessions",
     JSON.stringify({ ...loginData })
   );
@@ -75,27 +80,27 @@ export const loginUser = async (loginData: {
 };
 
 export const logoutUser = async (auth: IAuth) => {
-  const res = await axiosAPI.delete("/sessions", {
+  const res = await privateAPI.delete("/sessions", {
     headers: { Authorization: `Bearer ${auth.accessToken}` },
   });
   return res;
 };
 
 export const getOrders = async () => {
-  const res = await axiosAPI.get("/orders");
+  const res = await privateAPI.get("/orders");
   return res;
 };
 
 export const getAllProducts = (): Promise<IProduct[]> =>
-  axiosAPI.get("/products").then((res) => res.data);
+  publicAPI.get("/products").then((res) => res.data);
 
 export const getProductById = (productId: string): Promise<IProduct> =>
-  axiosAPI.get(`/products/${productId}`).then((res) => res.data);
+  publicAPI.get(`/products/${productId}`).then((res) => res.data);
 
 export const makePayment = async (
   items: { productId: string; quantity: number }[]
 ) => {
-  const res = await axiosAPI.post<{
+  const res = await publicAPI.post<{
     clientSecret: string;
     subTotal: number;
     shippingPrice: number;
