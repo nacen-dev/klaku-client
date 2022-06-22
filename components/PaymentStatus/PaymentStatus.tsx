@@ -56,8 +56,8 @@ export const PaymentStatus: React.FC<Props> = ({ clientSecret }) => {
               {message}
             </h2>
             <div className="flex items-center justify-center">
-              <div className="rounded-[50%] border-2 border-emerald-700 p-4">
-                <GiCheckMark className="text-emerald-700 text-4xl" />
+              <div className="rounded-[50%] border-2 border-emerald-700 bg-emerald-700 p-4">
+                <GiCheckMark className="text-white text-4xl" />
               </div>
             </div>
           </>
