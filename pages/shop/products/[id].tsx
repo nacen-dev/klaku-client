@@ -8,7 +8,7 @@ import StarRatingComponent from "react-star-rating-component";
 
 import { getProductById } from "../../../axios/axiosAPI";
 import { Button } from "../../../components/Button/Button";
-import { addToCart } from "../../../state";
+import { addAndShowProductInCart } from "../../../state";
 import { capitalize } from "../../../utils/capitalize";
 import { FaStar } from "react-icons/fa";
 
@@ -59,6 +59,8 @@ function Product({}: Props) {
     );
   }
 
+  
+
   return product ? (
     <div className="h-fit-content w-full flex flex-col md:flex-row">
       <div className="flex-1 relative">
@@ -80,13 +82,12 @@ function Product({}: Props) {
             name="rating"
             value={product.rating}
             editing={false}
-            renderStarIcon={() => <FaStar className="text-xl" 
-            />}
+            renderStarIcon={() => <FaStar className="text-xl" />}
           />
         </div>
         <Button
           className="rounded uppercase"
-          onClick={() => addToCart(product)}
+          onClick={() => addAndShowProductInCart(product)}
         >
           Add to cart
         </Button>

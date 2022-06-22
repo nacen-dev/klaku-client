@@ -1,13 +1,13 @@
 import Link from "next/link";
-import React from "react";
-import { addToCart, IProduct } from "../../state";
+import React, { FC } from "react";
+import { addAndShowProductInCart, IProduct } from "../../state";
 import { Button } from "../Button/Button";
 
 interface Props {
   productPreviewData: IProduct;
 }
 
-export const ProductPreview = ({ productPreviewData: product }: Props) => {
+export const ProductPreview: FC<Props> = ({ productPreviewData: product }) => {
   return (
     <div className="w-full my-2 bg-white rounded-lg flex flex-col">
       <Link href={`/shop/products/${product._id}`}>
@@ -24,7 +24,10 @@ export const ProductPreview = ({ productPreviewData: product }: Props) => {
           <p>${product.price}</p>
         </div>
 
-        <Button className="my-2" onClick={() => addToCart(product)}>
+        <Button
+          className="my-2"
+          onClick={() => addAndShowProductInCart(product)}
+        >
           Add to Cart
         </Button>
       </div>
