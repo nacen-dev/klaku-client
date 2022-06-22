@@ -111,7 +111,11 @@ export const makePayment = async (
 };
 
 export const verifyUser = async (email: string, token: string) => {
-  const res = await publicAPI.post<{ message: string }>("/users/verify", {
+  const res = await publicAPI.post<{
+    message: string;
+    expired: boolean;
+    verified: boolean;
+  }>("/users/verify", {
     email,
     token,
   });
@@ -119,8 +123,11 @@ export const verifyUser = async (email: string, token: string) => {
 };
 
 export const resendVerification = async (email: string) => {
-  const res = await publicAPI.post<{message: string}>("/users/verify/resend", {
-    email
-  })
+  const res = await publicAPI.post<{ message: string; verified?: boolean }>(
+    "/users/verify/resend",
+    {
+      email,
+    }
+  );
   return res.data;
-}
+};
