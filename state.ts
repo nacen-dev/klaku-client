@@ -32,6 +32,7 @@ export interface ICartItem {
 interface IState {
   auth: IAuth;
   cart: ICartItem[];
+  showCart: boolean;
 }
 
 const initialState: IState = {
@@ -40,6 +41,7 @@ const initialState: IState = {
     (typeof window !== "undefined" &&
       JSON.parse(localStorage.getItem("cart") as string)) ||
     [],
+  showCart: false,
 };
 
 export const state = createGlobalState<IState>(initialState);
@@ -74,6 +76,7 @@ export const indexOfProductInCart = (cart: ICartItem[], productId: string) => {
 
 export const addToCart = (product: IProduct, quantity: number = 1) => {
   const cart = getGlobalState("cart");
+  const setShowCart = (value: boolean) => setGlobalState("showCart", value);
   const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
   const index = indexOfProductInCart(cart, product._id);
   const updatedCart = [...cart];
@@ -85,6 +88,7 @@ export const addToCart = (product: IProduct, quantity: number = 1) => {
     }
   }
   setCart(updatedCart);
+  setShowCart(true);
 };
 
 export const deleteFromCart = (cartItem: ICartItem) => {
