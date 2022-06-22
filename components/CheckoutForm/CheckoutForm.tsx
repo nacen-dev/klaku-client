@@ -53,10 +53,10 @@ export const CheckoutForm: FC<Props> = () => {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      {/* Add class hidden instead of unrendering since stripe needs PaymentElement to be mounted*/}
-      <PaymentElement className={isLoading ? "hidden" : ""} />
+      <h2 className="text-2xl my-4 text-center">Payment Information</h2>
+      <PaymentElement />
       {isLoading ? (
-        <div className="h-[320px] flex flex-col items-center justify-center">
+        <div className="h-full flex flex-col items-center justify-center">
           <Loader />
           <span className="text-xl">Loading...</span>
         </div>
