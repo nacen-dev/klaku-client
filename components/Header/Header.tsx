@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Cart, CartProps } from "../Cart/Cart";
 import { Hamburger } from "../Hamburger/Hamburger";
@@ -16,7 +16,7 @@ const DynamicCart = dynamic<CartProps>(
   }
 );
 
-export const Header = (props: Props) => {
+export const Header:FC<Props> = (props) => {
   const [show, setShow] = useState(false);
 
   const toggleHamburger = () => {

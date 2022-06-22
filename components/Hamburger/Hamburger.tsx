@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 interface Props {
   click: () => void;
@@ -7,12 +7,12 @@ interface Props {
   className?: string;
 }
 
-export const Hamburger = ({
+export const Hamburger:FC<Props> = ({
   click,
   lineColorClass,
   buttonBackgroundClass,
   className
-}: Props) => {
+}) => {
   return (
     <button
       onClick={click}

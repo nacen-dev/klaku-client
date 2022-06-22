@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import Portal from "../../hoc/Portal";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -7,13 +7,13 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   overlayClass?: string;
 }
 
-export const Sidebar = ({
+export const Sidebar:FC<Props> = ({
   show,
   className,
   children,
   close,
   overlayClass,
-}: Props) => {
+}) => {
   return (
     <Portal>
       <>

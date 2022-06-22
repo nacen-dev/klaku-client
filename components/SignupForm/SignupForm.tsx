@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ErrorText } from "../ErrorText/ErrorText";
@@ -27,7 +27,7 @@ const SignupSchema = Yup.object().shape({
     .required("Confirm your password"),
 });
 
-export const SignupForm = ({ submit, signUpMessage, errorMessage }: Props) => {
+export const SignupForm:FC<Props> = ({ submit, signUpMessage, errorMessage }) => {
   return (
     <Formik
       initialValues={{

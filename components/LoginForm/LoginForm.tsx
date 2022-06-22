@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ErrorText } from "../ErrorText/ErrorText";
@@ -15,7 +15,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-export const LoginForm = ({ login }: Props) => {
+export const LoginForm:FC<Props> = ({ login }) => {
   return (
     <Formik
       initialValues={{

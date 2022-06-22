@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { getRefreshToken } from "../axios/axiosAPI";
 import { Loader } from "../components/Loader/Loader";
 import { useGlobalState } from "../state";
@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const PersistLogin = ({ children }: Props) => {
+export const PersistLogin:FC<Props> = ({ children }) => {
   const [auth, setAuth] = useGlobalState("auth");
   const [isLoading, setIsLoading] = useState(true);
 

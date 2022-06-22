@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { FC } from "react";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 
@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: Props) => {
+const Layout:FC<Props> = ({ children }) => {
   return (
     <div>
       <Head>

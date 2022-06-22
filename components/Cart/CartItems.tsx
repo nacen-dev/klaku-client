@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import {
   addToCart,
   deleteFromCart,
@@ -15,7 +15,7 @@ interface Props {
   className?: string;
 }
 
-export const CartItems = ({ cart, className }: Props) => {
+export const CartItems:FC<Props> = ({ cart, className }) => {
   return (
     <ul className={`flex flex-col gap-4 overflow-y-auto ${className ? className : ""}`}>
       {cart.map((cartItem) => (

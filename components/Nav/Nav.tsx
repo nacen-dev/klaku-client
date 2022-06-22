@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React from "react";
+import React, { FC } from "react";
 import { useGlobalState } from "../../state";
 import { Logout } from "../Logout/Logout";
 
@@ -8,7 +8,7 @@ interface Props extends React.HTMLAttributes<HTMLElement> {
   onNavItemClick?: () => void;
 }
 
-export const Nav = ({ className, listClass, onNavItemClick }: Props) => {
+export const Nav:FC<Props> = ({ className, listClass, onNavItemClick }) => {
   const [auth, setAuth] = useGlobalState("auth");
 
   return (

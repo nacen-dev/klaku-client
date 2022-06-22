@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { FC } from "react";
+
 import { addAndShowProductInCart, IProduct } from "../../state";
 import { Button } from "../Button/Button";
 

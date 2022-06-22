@@ -1,6 +1,6 @@
-import { useElements, useStripe } from "@stripe/react-stripe-js";
+import { useStripe } from "@stripe/react-stripe-js";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { GiCheckMark } from "react-icons/gi";
 
 import { clearCart } from "../../state";
@@ -10,7 +10,7 @@ interface Props {
   clientSecret: string;
 }
 
-export const PaymentStatus: React.FC<Props> = ({ clientSecret }) => {
+export const PaymentStatus: FC<Props> = ({ clientSecret }) => {
   const stripe = useStripe();
   const [message, setMessage] = useState("");
   const [paymentStatus, setPaymentStatus] = useState("");

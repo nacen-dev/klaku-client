@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { FC } from "react";
 import { logoutUser } from "../../axios/axiosAPI";
 import { useGlobalState } from "../../state";
 
 interface Props {}
 
-export const Logout = (props: Props) => {
+export const Logout:FC<Props> = (props) => {
   const [auth, setAuth] = useGlobalState("auth");
   const router = useRouter();
 
