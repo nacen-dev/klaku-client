@@ -19,13 +19,13 @@ export const ProductPreview = ({ productPreviewData: product }: Props) => {
         />
       </Link>
       <div className="px-4 py-2 flex-1 flex flex-col justify-between">
-        <div className="flex justify-between my-1">
+        <div className="flex text-xl justify-between my-1 text-slate-700 font-semibold">
           <p>{product.name}</p>
           <p>${product.price}</p>
         </div>
 
-        <Button className="mb-2" onClick={() => addToCart(product)}>
-          Add to cart
+        <Button className="my-2" onClick={() => addToCart(product)}>
+          Add to Cart
         </Button>
       </div>
     </div>

@@ -45,12 +45,12 @@ function Product({}: Props) {
   } = useQuery(["product", productId], () => getProductById(productId));
 
   if (isLoading) {
-    return <div className="h-screen w-full text-center">Loading...</div>;
+    return <div className="h-fit-content w-full text-center">Loading...</div>;
   }
 
   if (isError) {
     return (
-      <div className="h-screen w-full justify-center items-center flex flex-col">
+      <div className="h-fit-content w-full justify-center items-center flex flex-col">
         <p className="text-2xl">Could not find the product</p>
         <button className="">
           <Link href="/shop">Back to shop</Link>
@@ -60,14 +60,14 @@ function Product({}: Props) {
   }
 
   return product ? (
-    <div className="h-screen w-full flex flex-col md:flex-row">
+    <div className="h-fit-content w-full flex flex-col md:flex-row">
       <div className="flex-1 relative">
         <Image src={product.image} layout="fill" alt={product.name} />
       </div>
-      <div className="flex flex-col flex-1 p-4 gap-2">
-        <h2 className="text-4xl mb-2">{product.name}</h2>
+      <div className="flex flex-col flex-1 p-4 gap-2 text-slate-700">
+        <h2 className="text-3xl mb-2 font-semibold">{product.name}</h2>
         <p className="text-lg">{product.description}</p>
-        <p className="text-lg">${product.price}</p>
+        <p className="text-lg font-semibold">${product.price}</p>
         {product.color && (
           <p className="text-lg">Color: {capitalize(product.color)}</p>
         )}
@@ -80,7 +80,8 @@ function Product({}: Props) {
             name="rating"
             value={product.rating}
             editing={false}
-            renderStarIcon={() => <FaStar className="text-xl" />}
+            renderStarIcon={() => <FaStar className="text-xl" 
+            />}
           />
         </div>
         <Button
@@ -90,7 +91,7 @@ function Product({}: Props) {
           Add to cart
         </Button>
 
-        <div className="border-2 p-2 px-6 mt-4">
+        <div className="border-2 p-2 px-6 mt-4 border-slate-700">
           <h3 className="text-xl text-center font-semibold mb-6">
             Customer Reviews
           </h3>
