@@ -153,3 +153,8 @@ export const reduceItemFromCart = (
     );
   }
 };
+
+export const clearCart = () => {
+  const setCart = (value: ICartItem[]) => setGlobalState("cart", value);
+  setCart([]);
+};
