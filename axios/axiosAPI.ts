@@ -117,3 +117,10 @@ export const verifyUser = async (email: string, token: string) => {
   });
   return res.data;
 };
+
+export const resendVerification = async (email: string) => {
+  const res = await publicAPI.post("/users/verify/resend", {
+    email
+  })
+  return res.data;
+}
