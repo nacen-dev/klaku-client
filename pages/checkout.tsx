@@ -20,12 +20,18 @@ const Checkout: NextPage = () => {
       productId: cartItem.product._id,
       quantity: cartItem.quantity,
     }));
+
     const payment = async (products: typeof productsData) => {
-      const data = await makePayment(products);
-      setClientSecret(data.clientSecret);
-      setShippingPrice(data.shippingPrice);
-      setSubTotal(data.subTotal);
+      try {
+        const data = await makePayment(products);
+        setClientSecret(data.clientSecret);
+        setShippingPrice(data.shippingPrice);
+        setSubTotal(data.subTotal);
+      } catch (error) {
+        console.error(error);
+      }
     };
+
     payment(productsData);
   }, [cart]);
 
@@ -52,7 +58,9 @@ const Checkout: NextPage = () => {
           </div>
           <div className="flex justify-between">
             <span className="text-xl">Total: </span>
-            <span className="text-2xl font-bold">${subTotal + shippingPrice}</span>
+            <span className="text-2xl font-bold">
+              ${subTotal + shippingPrice}
+            </span>
           </div>
         </div>
       </div>
