@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { Cart, CartProps } from "../Cart/Cart";
@@ -29,7 +30,7 @@ export const Header = (props: Props) => {
   return (
     <>
       <div className="py-4 px-6 flex justify-between items-center bg-slate-700 text-white text-xl h-[10vh]">
-        <p>Klaku Clothing</p>
+        <Link href="/shop">Klaku Clothing</Link>
         <div className="flex justify-between gap-4">
           <Nav className="md-max:hidden" listClass="flex gap-4" />
           <Hamburger click={toggleHamburger} className="md:hidden" />
