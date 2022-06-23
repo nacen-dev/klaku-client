@@ -26,6 +26,7 @@ yarn install
 ```
 
 ## Features to implement and things to do
+- Sending new password after user click on forget password
 - Collect user and shipping information while checking out
 - Create orders after successful checkout 
 - User dashboard
