@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com"],
   },
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   async redirects() {
     return [
       {
