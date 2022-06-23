@@ -1,5 +1,6 @@
 import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
+import { StripeElementsOptions } from "@stripe/stripe-js";
+import { loadStripe } from '@stripe/stripe-js/pure'
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { makePayment } from "../axios/axiosAPI";
