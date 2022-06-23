@@ -21,7 +21,7 @@ const Shop = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen w-full justify-center items-center">
+      <div className="h-screen w-full flex justify-center items-center">
         <Loader />
       </div>
     );
