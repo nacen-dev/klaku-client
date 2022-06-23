@@ -22,7 +22,7 @@ const Shop = () => {
   if (isLoading) {
     return (
       <div className="h-screen w-full justify-center items-center">
-        <Loader />;
+        <Loader />
       </div>
     );
   }
