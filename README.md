@@ -26,12 +26,13 @@ yarn install
 ```
 
 ## Features to implement and things to do
-- Sending new password after user click on forget password
-- Collect user and shipping information while checking out
-- Create orders after successful checkout 
-- User dashboard
-- Wishlist
-- Discount
-- Merge cart data in client and server
-- Write more test for components
-- Write E2E test
+- [] Sending new password after user click on forget password
+- [] Collect user and shipping information while checking out
+- [] Create orders after successful checkout
+- [] Send contact form data to API or to email directly 
+- [] User dashboard
+- [] Wishlist
+- [] Discount
+- [] Merge cart data in client and server
+- [] Write more test for components
+- [] Write E2E test
