@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const PersistLogin:FC<Props> = ({ children }) => {
+export const PersistLogin: FC<Props> = ({ children }) => {
   const [auth, setAuth] = useGlobalState("auth");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,7 +34,7 @@ export const PersistLogin:FC<Props> = ({ children }) => {
   return (
     <>
       {isLoading ? (
-        <div className="h-screen w-full flex justify-center items-center">
+        <div className="h-fit-content w-full flex justify-center items-center">
           <Loader />
         </div>
       ) : (
