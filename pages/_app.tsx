@@ -27,7 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 MyApp.getInitialProps = async (appContext: AppContext) => {
   // calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(appContext);
-
+  console.log("Get response from app context in production",appContext.ctx.res)
   if (appContext.ctx.res?.statusCode === 404) {
     appContext.ctx.res.writeHead(302, { Location: "/shop" });
     appContext.ctx.res.end();
