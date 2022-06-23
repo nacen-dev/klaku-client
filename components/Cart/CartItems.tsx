@@ -15,9 +15,13 @@ interface Props {
   className?: string;
 }
 
-export const CartItems:FC<Props> = ({ cart, className }) => {
+export const CartItems: FC<Props> = ({ cart, className }) => {
   return (
-    <ul className={`flex flex-col gap-4 overflow-y-auto ${className ? className : ""}`}>
+    <ul
+      className={`flex flex-col gap-4 overflow-y-auto ${
+        className ? className : ""
+      }`}
+    >
       {cart.map((cartItem) => (
         <li key={cartItem.product._id} className="flex">
           <div className="w-[150px] relative">
@@ -44,26 +48,36 @@ export const CartItems:FC<Props> = ({ cart, className }) => {
 
             <div className="my-2">
               <p className="mb-2 text-lg">${cartItem.product.price}</p>
-              <div className="flex gap-1 justify-between rounded-2xl border border-slate-200 p-1 w-[100px]">
-                <button
-                  className="w-6 text-lg"
-                  onClick={() => reduceItemFromCart(cartItem)}
+
+              <div className="flex items-center justify-start gap-4">
+                <label
+                  htmlFor={`quantity-${cartItem.product.name}`}
+                  className="my-2 inline-block"
                 >
-                  -
-                </button>
-                <input
-                  max={cartItem.product.stock}
-                  className="bg-inherit w-6 text-center"
-                  type="number"
-                  value={cartItem.quantity}
-                  onChange={(event) => handleQuantityChange(cartItem, event)}
-                />
-                <button
-                  className="w-6 text-lg"
-                  onClick={() => addToCart(cartItem.product)}
-                >
-                  +
-                </button>
+                  Quantity
+                </label>
+                <div className="flex gap-1 justify-between rounded-2xl border border-slate-200 p-1">
+                  <button
+                    className="w-6 text-lg"
+                    onClick={() => reduceItemFromCart(cartItem)}
+                  >
+                    -
+                  </button>
+                  <input
+                    max={cartItem.product.stock}
+                    className="bg-inherit w-6 text-center"
+                    type="number"
+                    id={`quantity-${cartItem.product.name}`}
+                    value={cartItem.quantity}
+                    onChange={(event) => handleQuantityChange(cartItem, event)}
+                  />
+                  <button
+                    className="w-6 text-lg"
+                    onClick={() => addToCart(cartItem.product)}
+                  >
+                    +
+                  </button>
+                </div>
               </div>
             </div>
           </div>
