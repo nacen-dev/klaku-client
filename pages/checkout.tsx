@@ -43,7 +43,7 @@ const Checkout: NextPage = () => {
   };
 
   return (
-    <div className="h-full md:h-screen p-[5%] w-90% bg-neutral-200 flex flex-col md:flex-row">
+    <div className={`${cart.length === 0 ? "h-fit-content" : "h-full"} md:h-fit-content p-[5%] w-90% bg-neutral-200 flex flex-col md:flex-row`}>
       <div className="w-full md:w-1/2 h-100% px-8 py-4 bg-slate-700 text-white flex flex-col">
         <h2 className="text-2xl my-4 text-center">Order Summary</h2>
         <CartItems cart={cart} className="flex-1" />
