@@ -24,16 +24,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  // calls page's `getInitialProps` and fills `appProps.pageProps`
-  const appProps = await App.getInitialProps(appContext);
-  if (appContext.ctx.res?.statusCode === 404) {
-    appContext.ctx.res.writeHead(302, { Location: "/shop" });
-    appContext.ctx.res.end();
-    return;
-  }
-
-  return { ...appProps };
-};
-
 export default MyApp;
