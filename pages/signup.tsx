@@ -1,11 +1,21 @@
 import axios from "axios";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { registerUser } from "../axios/axiosAPI";
 import { SignupForm } from "../components/SignupForm/SignupForm";
+import { useGlobalState } from "../state";
 
 const Signup: NextPage = () => {
+  const [auth, setAuth] = useGlobalState("auth");
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (auth.accessToken) router.push("/shop");
+  }, []);
+
   const [signUpMessage, setSignUpMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const { mutate, error } = useMutation(registerUser, {
