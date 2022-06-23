@@ -1,6 +1,7 @@
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
 import { getAllProducts } from "../../axios/axiosAPI";
+import { ErrorText } from "../../components/ErrorText/ErrorText";
 import { Loader } from "../../components/Loader/Loader";
 import { ProductPreview } from "../../components/ProductPreview/ProductPreview";
 
@@ -21,14 +22,18 @@ const Shop = () => {
 
   if (isLoading) {
     return (
-      <div className="h-screen w-full flex justify-center items-center">
+      <div className="h-fit-content w-full flex justify-center items-center">
         <Loader />
       </div>
     );
   }
 
   if (isError) {
-    return <span>Error</span>;
+    return (
+      <div className="h-fit-content w-full flex justify-center items-center">
+        <ErrorText className="text-xl" message="An error has occurred. Try refreshing the page" />
+      </div>
+    )
   }
 
   return (
