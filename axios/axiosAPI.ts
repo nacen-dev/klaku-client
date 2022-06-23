@@ -1,11 +1,5 @@
 import axios from "axios";
-import {
-  getGlobalState,
-  IAuth,
-  ICartItem,
-  IProduct,
-  setGlobalState,
-} from "../state";
+import { getGlobalState, IAuth, IProduct, setGlobalState } from "../state";
 
 export type SignUpFormData = {
   firstName: string;
@@ -27,7 +21,13 @@ export const privateAPI = axios.create({
 });
 
 export const getRefreshToken = async () => {
-  const res = await privateAPI.post<IAuth>("/sessions/refresh");
+  const res = await publicAPI.post<IAuth>(
+    "/sessions/refresh",
+    {},
+    {
+      withCredentials: true,
+    }
+  );
   return res.data;
 };
 
@@ -48,7 +48,7 @@ privateAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalConfig = error.config;
-    if (error.response.status === 403 && !originalConfig._retry) {
+    if (error.response.status === 401 && !originalConfig._retry) {
       originalConfig._retry = true;
       try {
         const refreshToken = await getRefreshToken();
@@ -72,7 +72,7 @@ export const loginUser = async (loginData: {
   email: string;
   password: string;
 }) => {
-  const res = await publicAPI.post(
+  const res = await privateAPI.post(
     "/sessions",
     JSON.stringify({ ...loginData })
   );
@@ -100,7 +100,7 @@ export const getProductById = (productId: string): Promise<IProduct> =>
 export const makePayment = async (
   items: { productId: string; quantity: number }[]
 ) => {
-  const res = await publicAPI.post<{
+  const res = await privateAPI.post<{
     clientSecret: string;
     subTotal: number;
     shippingPrice: number;
