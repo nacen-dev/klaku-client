@@ -12,7 +12,7 @@ const Custom404 = (props: Props) => {
   }, []);
 
   return (
-    <div className="h-fit-content">
+    <div className="h-fit-content flex justify-center items-center">
       <Loader />
     </div>
   );
