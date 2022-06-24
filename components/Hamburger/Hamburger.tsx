@@ -14,12 +14,12 @@ export const Hamburger: FC<Props> = ({
   className,
 }) => {
   return (
-    <button onClick={click} className="flex gap-4">
+    <button onClick={click} className={`flex gap-4 ${className}`}>
       <span>Menu</span>
       <div
         className={`w-8 h-7 ${
           buttonBackgroundClass ? buttonBackgroundClass : "bg-transparent"
-        } border-none flex justify-around flex-col cursor-pointer p-0 ${className}`}
+        } border-none flex justify-around flex-col cursor-pointer p-0`}
       >
         <div
           className={`w-8 h-[2px] ${
